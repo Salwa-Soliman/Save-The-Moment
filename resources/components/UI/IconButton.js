@@ -6,9 +6,10 @@ export default function IconButton({ name, color, size, onPress }) {
     <Button
       variant={"ghost"}
       colorScheme="gray"
-      onPress={onPress}
+      onPress={() => {
+        onPress();
+      }}
       p="2"
-      // m="2"
       pressRetentionOffset={"2"}
     >
       <Ionicons name={name} size={size} color={color} />

@@ -1,19 +1,20 @@
 import React from "react";
-import NewScreen from "../components/NewScreen";
 import PlaceForm from "../components/Places/PlaceForm";
-import { Text } from "native-base";
+import { ScrollView, Text } from "native-base";
 import { COLORS } from "../constants/Colors";
 import { Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { insertPlace } from "../util/database";
 
-export default function AddPlace() {
+export default function AddPlace({ navigation }) {
   return (
-    <NewScreen>
+    <ScrollView p="5">
       <Text
         textAlign={"center"}
         color={COLORS.basic400}
         fontWeight="bold"
         fontSize="22"
+        my="3"
       >
         Take an Image{" "}
         <Icon as={Ionicons} name="camera" size="26" color={COLORS.basic400} />,{" "}
@@ -21,7 +22,12 @@ export default function AddPlace() {
         Save Your Moment{" "}
         <Icon as={Ionicons} name="heart" size="26" color={COLORS.basic400} />
       </Text>
-      <PlaceForm />
-    </NewScreen>
+      <PlaceForm onCreatePlace={createPlaceHandler} />
+    </ScrollView>
   );
+
+  function createPlaceHandler(place) {
+    insertPlace(place);
+    navigation.navigate("AllPlaces");
+  }
 }

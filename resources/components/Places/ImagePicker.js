@@ -9,8 +9,9 @@ import { Alert } from "react-native";
 import { COLORS } from "./../../constants/Colors";
 import { Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import CustomButton from "../UI/CustomButton";
 
-export default function ImagePicker() {
+export default function ImagePicker({ onTakeImage }) {
   const [CameraPermission, requestPermission] = useCameraPermissions();
   const [pickedImage, setPickedImage] = useState("");
 
@@ -19,8 +20,9 @@ export default function ImagePicker() {
       <Center
         w="100%"
         h="200"
-        bg={pickedImage ? "transparent" : COLORS.primary300}
+        bg={pickedImage ? "transparent" : COLORS.primary300 + "A0"}
         my="5"
+        borderRadius={"md"}
       >
         {pickedImage ? (
           <Image
@@ -31,40 +33,23 @@ export default function ImagePicker() {
             h={"100%"}
           />
         ) : (
-          <Text color={COLORS.basic500} fontSize={16} italic>
+          <Text color={COLORS.basic600} fontSize={16} italic>
             You haven't captured a picture yet ...{" "}
           </Text>
         )}
       </Center>
-      <Button
-        onPress={takeImageHandler}
-        rounded="full"
-        bg={COLORS.basic500}
-        py="3"
-        px="6"
-        variant={"outline"}
-      >
-        <HStack alignItems="center">
-          <Icon
-            as={Ionicons}
-            name="camera"
-            size="26"
-            color={COLORS.secondary100}
-          />
-          <Text color={COLORS.secondary100} fontWeight="bold" fontSize="16">
-            {"  "}Take an Image
-          </Text>
-        </HStack>
-      </Button>
+      <CustomButton icon="camera" onPress={takeImageHandler}>
+        Take an Image
+      </CustomButton>
     </Center>
   );
 
   async function takeImageHandler() {
-    console.log(CameraPermission.status === PermissionStatus.UNDETERMINED);
+    // console.log(CameraPermission.status === PermissionStatus.UNDETERMINED);
 
     const hasPermission = await verifyPermission();
 
-    console.log("hasPermission", hasPermission);
+    // console.log("hasPermission", hasPermission);
 
     if (hasPermission) {
       const image = await launchCameraAsync({
@@ -74,6 +59,7 @@ export default function ImagePicker() {
       });
       // console.log(image);
       setPickedImage(image.uri);
+      onTakeImage(image.uri);
     }
   }
 
@@ -86,32 +72,28 @@ export default function ImagePicker() {
     }
 
     if (CameraPermission.status === PermissionStatus.DENIED) {
-      // Alert.alert(
-      //   "Insuffecient Permission!",
-      //   "You won't be able to take a picture unless you enable the camera permission",
-      //   [
-      //     {
-      //       text: "Allow Access",
-      //       onPress: () => {
-      //         CameraPermission.status = PermissionStatus.UNDETERMINED;
-      //         takeImageHandler();
-      //       },
-      //       style: "default",
-      //     },
-      //     {
-      //       text: "Cancel",
-      //       style: "cancel",
-      //     },
-      //   ],
-      //   {
-      //     cancelable: true,
-      //   }
-      // );
-      // return false;
-      Alert.alert("Permission Denied!", "You need to grant camera access");
-      const permissionResponse = await requestPermission();
-
-      return permissionResponse.granted;
+      Alert.alert(
+        "Insuffecient Permission!",
+        "You won't be able to take a picture unless you enable the camera permission",
+        [
+          {
+            text: "Allow Access",
+            onPress: () => {
+              CameraPermission.status = PermissionStatus.UNDETERMINED;
+              takeImageHandler();
+            },
+            style: "default",
+          },
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+        ],
+        {
+          cancelable: true,
+        }
+      );
+      return false;
     }
 
     return true;
