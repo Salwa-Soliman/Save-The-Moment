@@ -19,7 +19,7 @@ export default function PlacesList({ places }) {
           fontFamily="second"
         >
           {" "}
-          No places added yet ...{"\n"}Start adding some!
+          Nothing's added yet ...{"\n"}Start adding some!
         </Text>
       </Center>
     );
