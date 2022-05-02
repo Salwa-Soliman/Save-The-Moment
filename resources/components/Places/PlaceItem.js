@@ -34,14 +34,15 @@ export default function PlaceItem({ place, onSelect }) {
             fontSize={25}
             textAlign="center"
             italic
+            fontFamily="bad-script"
           >
             {place.date}
           </Text>
           <Text
-            fontWeight={"bold"}
             color={COLORS.basic400}
             fontSize={16}
             textAlign="center"
+            fontFamily="bad-script"
           >
             {place.time} {place.time.split(":")[0] < 12 ? "AM" : "PM"}
           </Text>

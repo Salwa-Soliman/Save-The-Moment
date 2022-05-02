@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Heading, HStack, Image, ScrollView, Text, View } from "native-base";
 import LoadingData from "../components/LoadingData";
-import NewScreen from "../components/NewScreen";
 import { COLORS } from "../constants/Colors";
 import { deleteItemFromDb, fetchPlaceDetails } from "../util/database";
 import { useToast } from "native-base";

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NativeBaseProvider, Box } from "native-base";
+import { NativeBaseProvider, Box, Text } from "native-base";
 import AllPlaces from "./resources/screens/AllPlaces";
 import AddPlace from "./resources/screens/AddPlace";
 import IconButton from "./resources/components/UI/IconButton";
@@ -10,10 +11,17 @@ import { COLORS } from "./resources/constants/Colors";
 import { init } from "./resources/util/database";
 import AppLoading from "expo-app-loading";
 import PlaceDetails from "./resources/screens/PlaceDetails";
+import Splash from "./resources/screens/Splash";
+import { ImageBackground } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "bad-script": require("./resources/fonts/Bad_Script/BadScript-Regular.ttf"),
+    second: require("./resources/fonts/BerkshireSwash-Regular.ttf"),
+  });
+
   const [isDbInitialized, setIsDbInitialized] = useState(false);
 
   useEffect(() => {
@@ -22,21 +30,34 @@ export default function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  if (!isDbInitialized) {
-    <AppLoading />;
+  if (!isDbInitialized || !fontsLoaded) {
+    // return <Text>app</Text>;
+    return <AppLoading />;
+    console.log("inside appjs");
   }
   return (
     <NativeBaseProvider>
       <StatusBar style={"light"} />
-      <Box flex="1">
+      <ImageBackground
+        style={{ flex: 1 }}
+        source={require("./resources/images/bg.jpg")}
+        resizeMode="cover"
+      >
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
-              headerStyle: { backgroundColor: COLORS.primary700 },
+              headerStyle: {
+                backgroundColor: COLORS.primary700,
+              },
               headerTintColor: COLORS.primary50,
-              contentStyle: { backgroundColor: COLORS.primary50 },
+              contentStyle: { backgroundColor: "transparent" },
             }}
           >
+            <Stack.Screen
+              name="Splash"
+              component={Splash}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="AllPlaces"
               component={AllPlaces}
@@ -47,7 +68,9 @@ export default function App() {
                     color={tintColor}
                     size={30}
                     name="add"
-                    onPress={() => navigation.navigate("AddPlace")}
+                    onPress={() => {
+                      navigation.navigate("AddPlace");
+                    }}
                   />
                 ),
               })}
@@ -68,7 +91,7 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </Box>
+      </ImageBackground>
     </NativeBaseProvider>
   );
 }

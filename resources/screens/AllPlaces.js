@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import PlacesList from "../components/Places/PlacesList";
-import NewScreen from "./../components/NewScreen";
 import { fetchPlaces } from "./../util/database";
 
 export default function AllPlaces() {

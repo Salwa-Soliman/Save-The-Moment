@@ -28,10 +28,10 @@ export default function PlaceForm({ onCreatePlace }) {
           placeholder="Describe your moment .. Make it a memory"
           w="100%"
           bg={COLORS.primary300 + "A0"}
-          placeholderTextColor={COLORS.primary700 + "50"}
+          placeholderTextColor={COLORS.primary700 + "80"}
           fontSize={16}
           color={COLORS.primary500}
-          fontWeight={"700"}
+          fontFamily="bad-script"
           onChangeText={(val) => {
             setTitle(val);
           }}
