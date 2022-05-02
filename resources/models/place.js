@@ -5,7 +5,5 @@ export class Place {
     this.date = date;
     this.time = time;
     this.id = id;
-    // this.address = address;
-    // this.location = location; //{lat: number, long: number}
   }
 }

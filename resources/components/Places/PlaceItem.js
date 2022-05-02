@@ -24,27 +24,25 @@ export default function PlaceItem({ place, onSelect }) {
         <Button
           variant={"outline"}
           flex="1"
-          bg={COLORS.secondary200 + "a0"}
-          colorScheme="info"
+          bg={COLORS.primary100 + "a0"}
+          colorScheme="pink"
           onPress={() => onSelect(place.id)}
         >
           <Text
-            fontWeight={"bold"}
             color={COLORS.basic400}
             fontSize={25}
             textAlign="center"
-            italic
-            fontFamily="bad-script"
+            fontFamily="second"
           >
             {place.date}
           </Text>
           <Text
             color={COLORS.basic400}
-            fontSize={16}
+            fontSize={18}
             textAlign="center"
-            fontFamily="bad-script"
+            fontFamily="second"
           >
-            {place.time} {place.time.split(":")[0] < 12 ? "AM" : "PM"}
+            {place.time}
           </Text>
         </Button>
       </ImageBackground>

@@ -20,20 +20,23 @@ export default function ImagePicker({ onTakeImage }) {
       <Center
         w="100%"
         h="200"
-        bg={pickedImage ? "transparent" : COLORS.primary300 + "A0"}
+        bg={pickedImage ? "transparent" : COLORS.primary100 + "A0"}
         my="5"
+        borderWidth={2}
+        borderColor={COLORS.primary100}
+        shadow={4}
         borderRadius={"md"}
       >
         {pickedImage ? (
           <Image
             source={{ uri: pickedImage }}
-            resizeMode="contain"
+            resizeMode="cover"
             alt="picked-image"
             w={"100%"}
             h={"100%"}
           />
         ) : (
-          <Text color={COLORS.basic600} fontSize={16} italic>
+          <Text color={COLORS.basic600} fontSize={18} fontFamily="second">
             You haven't captured a picture yet ...{" "}
           </Text>
         )}

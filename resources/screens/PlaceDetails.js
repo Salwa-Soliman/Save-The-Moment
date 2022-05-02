@@ -25,7 +25,7 @@ export default function PlaceDetails({ route, navigation }) {
 
       //set screen options
       navigation.setOptions({
-        title: fetchedPlace.title,
+        title: place.title,
         headerRight: ({ tintColor }) => (
           <IconButton
             color={tintColor}
@@ -59,36 +59,36 @@ export default function PlaceDetails({ route, navigation }) {
       <View p="5">
         {/* Title with edit icon  */}
         <HStack w="100%" alignItems={"center"} justifyContent="center" mb="5">
-          <Heading
-            // textAlign={"center"}
+          <Text
+            textAlign={"center"}
             fontSize="26"
             color={COLORS.basic400}
+            fontFamily="second"
           >
             {fetchedPlace.title}
-          </Heading>
+          </Text>
           <Icon
             as={Ionicons}
             name="create-outline"
             size="xl"
             mx="2"
-            color={COLORS.primary400}
+            color={"#ff7266"}
             onPress={() => setIsEditingText(true)}
           />
         </HStack>
         {/* Date */}
-        <Heading fontSize={16} my={3} color={COLORS.primary600}>
-          Date:{" "}
-          <Text fontWeight={"semibold"} fontSize={14}>
-            {fetchedPlace.date}
-          </Text>
-        </Heading>
+        <Text
+          fontFamily="second"
+          fontSize={20}
+          my={3}
+          color={COLORS.primary600}
+        >
+          Date: <Text fontSize={16}>{fetchedPlace.date}</Text>
+        </Text>
         {/* Time  */}
-        <Heading fontSize={16} color={COLORS.basic600}>
-          Time:{" "}
-          <Text fontWeight={"semibold"} fontSize={14}>
-            {fetchedPlace.time}
-          </Text>
-        </Heading>
+        <Text fontFamily="second" fontSize={20} color={COLORS.basic600}>
+          Time: <Text fontSize={16}>{fetchedPlace.time}</Text>
+        </Text>
 
         {/* Modal => Edit Title  */}
         <EditTextModal

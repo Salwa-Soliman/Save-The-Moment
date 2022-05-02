@@ -48,8 +48,10 @@ export default function App() {
             screenOptions={{
               headerStyle: {
                 backgroundColor: COLORS.primary700,
+                fontFamily: "second",
               },
-              headerTintColor: COLORS.primary50,
+              headerTitleStyle: { fontFamily: "second" },
+              headerTintColor: COLORS.primary100,
               contentStyle: { backgroundColor: "transparent" },
             }}
           >
@@ -62,6 +64,7 @@ export default function App() {
               name="AllPlaces"
               component={AllPlaces}
               options={({ navigation }) => ({
+                headerBackVisible: false,
                 title: "Your Saved Memories",
                 headerRight: ({ tintColor }) => (
                   <IconButton

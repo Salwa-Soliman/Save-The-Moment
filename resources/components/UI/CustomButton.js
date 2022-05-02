@@ -29,8 +29,8 @@ export default function CustomButton({
         )}
         <Text
           color={hasBg ? COLORS.secondary100 : COLORS.primary600}
-          fontWeight="bold"
-          fontSize={hasBg ? 18 : 15}
+          fontSize={hasBg ? 18 : 16}
+          fontFamily="second"
         >
           {" "}
           {children}

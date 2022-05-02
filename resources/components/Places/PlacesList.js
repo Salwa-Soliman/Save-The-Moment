@@ -16,8 +16,9 @@ export default function PlacesList({ places }) {
           fontSize={26}
           textAlign={"center"}
           color={COLORS.basic400}
-          fontFamily="bad-script"
+          fontFamily="second"
         >
+          {" "}
           No places added yet ...{"\n"}Start adding some!
         </Text>
       </Center>

@@ -3,6 +3,7 @@ import { Modal, Button, Box, TextArea, Center } from "native-base";
 import { COLORS } from "../constants/Colors";
 import { Alert } from "react-native";
 import { useToast } from "native-base";
+import CustomButton from "./UI/CustomButton";
 
 export default function EditTextModal({
   showModal,
@@ -14,21 +15,27 @@ export default function EditTextModal({
   const toast = useToast();
 
   return (
-    <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+    <Modal
+      isOpen={showModal}
+      onClose={() => setShowModal(false)}
+      bg={COLORS.primary700 + "a0"}
+    >
       <Modal.Content maxWidth="400px">
         <Modal.CloseButton />
-        <Modal.Header>Update Text</Modal.Header>
+        <Modal.Header fontFamily={"second"} fontWeight="400">
+          Update Text
+        </Modal.Header>
         <Modal.Body>
           <Box alignItems="center" w="100%" mt={5}>
             <TextArea
               h={20}
-              placeholder="Describe your moment .. Make it a memory"
-              // w="100%"
-              // bg={COLORS.primary300 + "A0"}
-              // placeholderTextColor={COLORS.primary700 + "50"}
+              placeholder="Edit and save changes"
               fontSize={16}
-              color={COLORS.primary500}
-              fontWeight={"700"}
+              bg={COLORS.primary100 + "a0"}
+              borderWidth={2}
+              borderColor={COLORS.primary100}
+              color={COLORS.primary600}
+              fontFamily={"second"}
               onChangeText={(val) => {
                 setUpdatedTitle(val);
               }}
@@ -37,19 +44,20 @@ export default function EditTextModal({
             />
           </Box>
         </Modal.Body>
-        <Modal.Footer>
-          <Button.Group space={2}>
-            <Button
-              variant="ghost"
-              colorScheme="blueGray"
-              onPress={() => {
-                setShowModal(false);
-              }}
-            >
-              Cancel
-            </Button>
-            <Button onPress={saveUpdatedTitle}>Save</Button>
-          </Button.Group>
+        <Modal.Footer justifyContent={"center"} alignItems={"center"}>
+          <Button
+            onPress={saveUpdatedTitle}
+            bg={COLORS.primary600}
+            px={4}
+            rounded={"xl"}
+            _text={{
+              fontFamily: "second",
+              color: COLORS.primary100,
+            }}
+            colorScheme={"danger"}
+          >
+            Save Changes
+          </Button>{" "}
         </Modal.Footer>
       </Modal.Content>
     </Modal>

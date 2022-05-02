@@ -6,8 +6,8 @@ export default function LoadingData() {
   return (
     <Center flex={1}>
       <HStack space={2} justifyContent="center">
-        <Spinner accessibilityLabel="Loading posts" />
-        <Heading color="primary.500" fontSize="md">
+        <Spinner accessibilityLabel="Loading posts" color="#ff7266" />
+        <Heading color="#ff7266" fontSize="md">
           Loading
         </Heading>
       </HStack>

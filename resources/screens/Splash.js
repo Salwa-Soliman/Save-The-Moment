@@ -47,11 +47,8 @@ export default function Splash({ navigation }) {
         autoPlay
         loop
         // duration={3}
-        // speed={0.8}
+        speed={0.5}
         resizeMode={"contain"}
-        onAnimationFinish={() => {
-          console.log("finished");
-        }}
         style={{ marginTop: screenHeight * 0.15 }}
       />
     </View>
@@ -61,6 +58,6 @@ export default function Splash({ navigation }) {
     fadeIn();
     setTimeout(() => {
       navigation.navigate("AllPlaces");
-    }, 3000);
+    }, 4000);
   }
 }

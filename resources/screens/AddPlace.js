@@ -12,9 +12,9 @@ export default function AddPlace({ navigation }) {
       <Text
         textAlign={"center"}
         color={COLORS.basic400}
-        fontWeight="bold"
         fontSize="22"
         my="3"
+        fontFamily={"second"}
       >
         Take an Image{" "}
         <Icon as={Ionicons} name="camera" size="26" color={COLORS.basic400} />,{" "}
