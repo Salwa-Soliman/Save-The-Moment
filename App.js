@@ -49,6 +49,8 @@ export default function App() {
               headerStyle: {
                 backgroundColor: COLORS.primary700,
                 fontFamily: "second",
+                // paddingTop: 10,
+                // paddingBottom: 10,
               },
               headerTitleStyle: { fontFamily: "second" },
               headerTintColor: COLORS.primary100,
@@ -89,7 +91,7 @@ export default function App() {
               name="PlaceDetails"
               component={PlaceDetails}
               options={{
-                title: "View Details",
+                title: "Details",
               }}
             />
           </Stack.Navigator>

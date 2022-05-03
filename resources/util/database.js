@@ -131,7 +131,7 @@ export function updateTitle(id, updatedTitle) {
 }
 
 export function deleteItemFromDb(id) {
-  console.log("**deleted**", id);
+  console.log("**deleting**", id);
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
@@ -139,7 +139,7 @@ export function deleteItemFromDb(id) {
       DELETE FROM places WHERE id = ?`,
         [id],
         () => {
-          console.log("**deleted**");
+          console.log("**deleted successfully**");
           resolve();
         },
         (err) => {

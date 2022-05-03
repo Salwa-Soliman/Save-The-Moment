@@ -1,21 +1,12 @@
 import { Center, Image, Text, View, Icon, HStack } from "native-base";
 import React, { useState, useRef } from "react";
-import { Animated, ImageBackground, Dimensions } from "react-native";
+import { ImageBackground, Dimensions } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../constants/Colors";
 import LottieView from "lottie-react-native";
 
 export default function Splash({ navigation }) {
   const screenHeight = Dimensions.get("screen").height;
-  const splashAnim = useRef(new Animated.Value(0)).current;
-  const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(splashAnim, {
-      toValue: 1,
-      duration: 2000,
-      useNativeDriver: true,
-    }).start();
-  };
 
   navigateFromSplash();
 
@@ -33,21 +24,20 @@ export default function Splash({ navigation }) {
         resizeMode="cover"
       />
       {/* Text with heart  */}
-      <Animated.View style={{ opacity: splashAnim }}>
-        <HStack alignItems="center" mt={screenHeight * 0.2}>
-          <Text fontFamily={"second"} fontSize={24} color={COLORS.basic400}>
-            Save your moments{" "}
-          </Text>
-          <Icon as={Ionicons} name="heart" size="lg" color={COLORS.basic400} />
-        </HStack>
-      </Animated.View>
+      <HStack alignItems="center" mt={screenHeight * 0.2}>
+        <Text fontFamily={"second"} fontSize={24} color={COLORS.primary400}>
+          Save your moments{" "}
+        </Text>
+        <Icon as={Ionicons} name="heart" size="lg" color={COLORS.primary400} />
+      </HStack>
+
       {/* Lottie animated view  */}
       <LottieView
         source={require("../lottie/splash-animation.json")}
         autoPlay
         loop
         // duration={3}
-        speed={0.5}
+        speed={0.8}
         resizeMode={"contain"}
         style={{ marginTop: screenHeight * 0.15 }}
       />
@@ -55,7 +45,6 @@ export default function Splash({ navigation }) {
   );
 
   function navigateFromSplash() {
-    fadeIn();
     setTimeout(() => {
       navigation.navigate("AllPlaces");
     }, 4000);

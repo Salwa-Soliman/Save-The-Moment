@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Heading, HStack, Image, ScrollView, Text, View } from "native-base";
+import {
+  Heading,
+  HStack,
+  Image,
+  ScrollView,
+  Text,
+  View,
+  Center,
+} from "native-base";
 import LoadingData from "../components/LoadingData";
 import { COLORS } from "../constants/Colors";
 import { deleteItemFromDb, fetchPlaceDetails } from "../util/database";
 import { useToast } from "native-base";
 import { Icon } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
-import EditTextModal from "../components/EditTextModal";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import CustomModal from "../components/CustomModal";
 import { updateTitle } from "./../util/database";
 import CustomButton from "../components/UI/CustomButton";
 import IconButton from "./../components/UI/IconButton";
@@ -21,24 +29,22 @@ export default function PlaceDetails({ route, navigation }) {
     //get place using id
     async function loadPlaceData() {
       const place = await fetchPlaceDetails(placeId);
-      setFetchedPlace(place);
 
-      //set screen options
+      //set screen options => delete
       navigation.setOptions({
-        title: place.title,
         headerRight: ({ tintColor }) => (
           <IconButton
             color={tintColor}
             size={30}
             name="trash"
             onPress={() => {
-              // console.log("pressed");
               deleteItemFromDb(place.id);
               navigation.navigate("AllPlaces");
             }}
           />
         ),
       });
+      setFetchedPlace(place);
     }
 
     loadPlaceData();
@@ -49,49 +55,58 @@ export default function PlaceDetails({ route, navigation }) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        // alignItems: "center",
+        flex: 1,
+      }}
+    >
       <Image
-        source={{ uri: fetchedPlace.imgUri }}
+        source={{
+          uri: fetchedPlace.imgUri,
+        }}
         w="100%"
         h="300"
         alt={"place image"}
       />
       <View p="5">
         {/* Title with edit icon  */}
-        <HStack w="100%" alignItems={"center"} justifyContent="center" mb="5">
+        <Center alignSelf="center" w="90%" mb="5" px="5">
           <Text
             textAlign={"center"}
-            fontSize="26"
-            color={COLORS.basic400}
+            fontSize="22"
+            color={COLORS.primary400}
             fontFamily="second"
           >
             {fetchedPlace.title}
           </Text>
           <Icon
-            as={Ionicons}
-            name="create-outline"
-            size="xl"
+            as={MaterialCommunityIcons}
+            name="playlist-edit"
+            size="3xl"
             mx="2"
-            color={"#ff7266"}
+            color={COLORS.primary600}
             onPress={() => setIsEditingText(true)}
           />
-        </HStack>
-        {/* Date */}
-        <Text
-          fontFamily="second"
-          fontSize={20}
-          my={3}
-          color={COLORS.primary600}
-        >
-          Date: <Text fontSize={16}>{fetchedPlace.date}</Text>
-        </Text>
-        {/* Time  */}
-        <Text fontFamily="second" fontSize={20} color={COLORS.basic600}>
-          Time: <Text fontSize={16}>{fetchedPlace.time}</Text>
-        </Text>
+        </Center>
+        <View>
+          {/* Date */}
+          <Text
+            fontFamily="second"
+            fontSize={20}
+            my={3}
+            color={COLORS.primary600}
+          >
+            Date: <Text fontSize={16}>{fetchedPlace.date}</Text>
+          </Text>
+          {/* Time  */}
+          <Text fontFamily="second" fontSize={20} color={COLORS.primary600}>
+            Time: <Text fontSize={16}>{fetchedPlace.time}</Text>
+          </Text>
+        </View>
 
         {/* Modal => Edit Title  */}
-        <EditTextModal
+        <CustomModal
           showModal={isEditingText}
           setShowModal={setIsEditingText}
           currentTitle={fetchedPlace.title}
@@ -104,8 +119,9 @@ export default function PlaceDetails({ route, navigation }) {
   function onSaveHandler(updatedTitle) {
     console.log(updatedTitle);
     if (updatedTitle.trim()) {
-      fetchedPlace.title = updatedTitle.trim();
+      setFetchedPlace({ ...fetchedPlace, title: updatedTitle.trim() });
       updateTitle(fetchedPlace.id, updatedTitle.trim());
+
       // success toast message
       toast.show({
         description: "Updated Successfully",

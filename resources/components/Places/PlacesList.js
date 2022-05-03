@@ -15,7 +15,7 @@ export default function PlacesList({ places }) {
         <Text
           fontSize={26}
           textAlign={"center"}
-          color={COLORS.basic400}
+          color={COLORS.primary500}
           fontFamily="second"
         >
           {" "}

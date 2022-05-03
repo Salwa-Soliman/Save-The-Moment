@@ -25,11 +25,11 @@ export default function PlaceItem({ place, onSelect }) {
           variant={"outline"}
           flex="1"
           bg={COLORS.primary100 + "a0"}
-          colorScheme="pink"
+          colorScheme="info"
           onPress={() => onSelect(place.id)}
         >
           <Text
-            color={COLORS.basic400}
+            color={COLORS.primary300}
             fontSize={25}
             textAlign="center"
             fontFamily="second"
@@ -37,7 +37,7 @@ export default function PlaceItem({ place, onSelect }) {
             {place.date}
           </Text>
           <Text
-            color={COLORS.basic400}
+            color={COLORS.primary300}
             fontSize={18}
             textAlign="center"
             fontFamily="second"

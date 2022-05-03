@@ -20,11 +20,11 @@ export default function ImagePicker({ onTakeImage }) {
       <Center
         w="100%"
         h="200"
-        bg={pickedImage ? "transparent" : COLORS.primary100 + "A0"}
+        bg={pickedImage ? "transparent" : COLORS.primary100 + "60"}
         my="5"
         borderWidth={2}
-        borderColor={COLORS.primary100}
-        shadow={4}
+        borderColor={pickedImage ? "transparent" : COLORS.primary100}
+        // shadow={4}
         borderRadius={"md"}
       >
         {pickedImage ? (
@@ -36,8 +36,12 @@ export default function ImagePicker({ onTakeImage }) {
             h={"100%"}
           />
         ) : (
-          <Text color={COLORS.basic600} fontSize={18} fontFamily="second">
-            You haven't captured a picture yet ...{" "}
+          <Text
+            color={COLORS.primary700 + "80"}
+            fontSize={18}
+            fontFamily="second"
+          >
+            You haven't captured an image yet ...
           </Text>
         )}
       </Center>

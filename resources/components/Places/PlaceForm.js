@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { Alert } from "react-native";
 import { Place } from "../../models/place";
+import CustomAlert from "../CustomAlert";
 import CustomButton from "../UI/CustomButton";
 import { COLORS } from "./../../constants/Colors";
 import ImagePicker from "./ImagePicker";
@@ -18,6 +19,8 @@ import ImagePicker from "./ImagePicker";
 export default function PlaceForm({ onCreatePlace }) {
   const [title, setTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+  const [showAlert, setshowAlert] = useState(false);
+
   return (
     <View flex={1}>
       {/* textArea  */}
@@ -26,14 +29,13 @@ export default function PlaceForm({ onCreatePlace }) {
           h={20}
           placeholder="Describe your moment .. Make it a memory"
           w="100%"
-          bg={COLORS.primary100 + "A0"}
-          borderWidth={2}
-          borderColor={COLORS.primary100}
+          bg={COLORS.primary100 + "60"}
+          // borderWidth={2}
+          // borderColor={COLORS.primary100}
           placeholderTextColor={COLORS.primary700 + "80"}
           fontSize={16}
-          color={COLORS.primary600}
+          color={COLORS.primary300}
           fontFamily="second"
-          shadow={4}
           onChangeText={(val) => {
             setTitle(val);
           }}
@@ -42,6 +44,7 @@ export default function PlaceForm({ onCreatePlace }) {
         />
       </Box>
       <ImagePicker onTakeImage={takeImageHandler} />
+      <CustomAlert isOpen={showAlert} setIsOpen={setshowAlert} />
       <CustomButton onPress={addPlaceHandler} margin hasBg>
         Save Memory
       </CustomButton>
@@ -54,7 +57,8 @@ export default function PlaceForm({ onCreatePlace }) {
 
   function addPlaceHandler() {
     if (!(title.trim() && selectedImage)) {
-      Alert.alert("Can't Add!", "Please fill the text and pick an image");
+      setshowAlert(true);
+      // Alert.alert("Can't Add!", "Please fill the text and pick an image");
     } else {
       const date = new Date().toString();
       const [day, month, monthDay, year, time] = new Date()

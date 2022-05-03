@@ -11,16 +11,16 @@ export default function AddPlace({ navigation }) {
     <ScrollView p="5">
       <Text
         textAlign={"center"}
-        color={COLORS.basic400}
+        color={COLORS.primary400}
         fontSize="22"
         my="3"
         fontFamily={"second"}
       >
         Take an Image{" "}
-        <Icon as={Ionicons} name="camera" size="26" color={COLORS.basic400} />,{" "}
-        {"\n"}
+        <Icon as={Ionicons} name="camera" size="26" color={COLORS.primary400} />
+        , {"\n"}
         Save Your Moment{" "}
-        <Icon as={Ionicons} name="heart" size="26" color={COLORS.basic400} />
+        <Icon as={Ionicons} name="heart" size="26" color={COLORS.primary400} />
       </Text>
       <PlaceForm onCreatePlace={createPlaceHandler} />
     </ScrollView>
